@@ -10,6 +10,12 @@
 * contains a constructor to get keyboard input, and an overloaded
 * constructor to get parameterized input.
 *
+* KNOWN ISSUES:
+*
+* With both constructors operating in the main method, the
+* output looks a little odd because the deconstructor for both
+* instances is not called until the end of the method.
+*
 * This program does not handle non-numerical input.
 */
 
@@ -43,10 +49,11 @@ public:
 
 // constructors
 OhmsWarmup::OhmsWarmup(void) {
-  cout << "Enter Voltage: ";
+  cout << "\nEnter Voltage: ";
   cin >> voltage;
-  cout << "Enter Resistance: ";
+  cout << "\nEnter Resistance: ";
   cin >> resistance;
+  cout << endl;
   current = voltage / resistance;
   power = voltage * current;
 }
@@ -72,8 +79,8 @@ void OhmsWarmup::setResistance(double resist) {
   resistance = resist; // sets resistance
 }
 
-// utility, unclear if wanted voltage and
-// current to be parameters or just accessed
+// utility, unclear if wanted voltage and current to be
+// parameters or just accessed (and if so, with getters or not)
 void OhmsWarmup::utility() {
   current = getVoltage() / getResistance();
   power = getVoltage() * current;
@@ -82,10 +89,10 @@ void OhmsWarmup::utility() {
 // display
 void OhmsWarmup::display(void) {
   cout << "Circuit Parameters: " << endl;
-  cout << "\tVoltage: " << getVoltage() << "ohm" << endl;
-  cout << "\tResistance: " << getResistance() << "volts" << endl;
-  cout << "\tCurrent: " << getCurrent() << "Amps" << endl;
-  cout << "\tPower: " << getPower() << "Watts" << endl;
+  cout << "\tResistance: " << getResistance() << " ohm" << endl;
+  cout << "\tVoltage: " << getVoltage() << " volts" << endl;
+  cout << "\tCurrent: " << getCurrent() << " Amps" << endl;
+  cout << "\tPower: " << getPower() << " Watts" << endl;
 }
 
 int main() {
@@ -95,4 +102,5 @@ int main() {
   OhmsWarmup standard;
   standard.display();
 
+  return 0;
 }

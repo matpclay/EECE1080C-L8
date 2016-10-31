@@ -1,0 +1,27 @@
+@author Matthew Clayton
+@date 31 October 2016
+@assign.ment Lab 8 Ohm's Law
+@descrip.tion
+This text file contains the test data for Part 1 of the lab. These were tested separately because the output with both 
+looks a little funny due to when the deconstructor is called for the first instance.
+
+Overloaded Constructor:
+
+Circuit Parameters: 
+	Resistance: 1 ohm
+	Voltage: 10 volts
+	Current: 10 Amps
+	Power: 100 Watts
+Circuit Destroyed
+
+Standard Constructor:
+
+Enter Voltage: 100
+Enter Resistance: 50
+
+Circuit Parameters: 
+	Resistance: 50 ohm
+	Voltage: 100 volts
+	Current: 2 Amps
+	Power: 200 Watts
+Circuit Destroyed
