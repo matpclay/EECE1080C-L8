@@ -6,7 +6,9 @@
 * This file contains the code for Part 1 of the Ohm's Law lab (L8)
 * for EECE1080C. This file handles a situation involving one
 * resistor and one DC input voltage source, then uses these values
-* to calculate the current and power values.
+* to calculate the current and power values. This program
+* contains a constructor to get keyboard input, and an overloaded
+* constructor to get parameterized input.
 *
 * This program does not handle non-numerical input.
 */
@@ -14,7 +16,7 @@
 #include <iostream>
 using namespace std;
 
-class Ohms1 {
+class OhmsWarmup {
   // private members to store values
   double voltage;
   double resistance;
@@ -33,23 +35,23 @@ public:
   void utility();
   void display();
   // constructors
-  Ohms1();
-  Ohms1(double, double);
+  OhmsWarmup();
+  OhmsWarmup(double, double);
   // deconstructor
-  ~Ohms1();
+  ~OhmsWarmup();
 };
 
 // constructors
-Ohms1::Ohms1(void) {
-  cout << "Enter voltage (volts): ";
+OhmsWarmup::OhmsWarmup(void) {
+  cout << "Enter Voltage: ";
   cin >> voltage;
-  cout << "Enter resistance (ohms): ";
+  cout << "Enter Resistance: ";
   cin >> resistance;
   current = voltage / resistance;
   power = voltage * current;
 }
 
-Ohms1::Ohms1(double volts, double resistor) {
+OhmsWarmup::OhmsWarmup(double volts, double resistor) {
   voltage = volts;
   resistance = resistor;
   current = voltage / resistance;
@@ -57,30 +59,40 @@ Ohms1::Ohms1(double volts, double resistor) {
 }
 
 // deconstructor
-Ohms1::~Ohms1(void) {
+OhmsWarmup::~OhmsWarmup(void) {
   cout << "Circuit Destroyed" << endl;
 }
 
 // setters
-void Ohms1::setVoltage(double volt) {
+void OhmsWarmup::setVoltage(double volt) {
   voltage = volt; // sets voltage
 }
 
-void Ohms1::setResistance(double resist) {
+void OhmsWarmup::setResistance(double resist) {
   resistance = resist; // sets resistance
 }
 
 // utility, unclear if wanted voltage and
 // current to be parameters or just accessed
-void Ohms1::utility() {
+void OhmsWarmup::utility() {
   current = getVoltage() / getResistance();
   power = getVoltage() * current;
 }
 
 // display
-void Ohms1::display(void) {
-  cout << "Voltage (volts): " << getVoltage() << endl;
-  cout << "Resistance (ohms): " << getResistance() << endl;
-  cout << "Current (amps): " << getCurrent() << endl;
-  cout << "Power (watts): " << getPower() << endl;
+void OhmsWarmup::display(void) {
+  cout << "Circuit Parameters: " << endl;
+  cout << "\tVoltage: " << getVoltage() << "ohm" << endl;
+  cout << "\tResistance: " << getResistance() << "volts" << endl;
+  cout << "\tCurrent: " << getCurrent() << "Amps" << endl;
+  cout << "\tPower: " << getPower() << "Watts" << endl;
+}
+
+int main() {
+  OhmsWarmup overload(10, 1);
+  overload.display();
+
+  OhmsWarmup standard;
+  standard.display();
+
 }
