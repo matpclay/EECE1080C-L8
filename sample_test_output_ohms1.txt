@@ -1,0 +1,36 @@
+@author Matthew Clayton
+@date 1 November 2016
+@assign.ment Lab 8 Ohm's Law
+@descrip.tion
+This text file contains the test data for Part 2, Task 1. A simple 1-node DC CKT Simulator.
+
+Input source voltage (volts): 45
+
+Input resistor values. At any time, enter a negative value to stop adding resistors.
+
+Input resistor value (ohms): 5000
+
+Input resistor value (ohms): 10000
+
+Input resistor value (ohms): 7500
+
+Input resistor value (ohms): -37
+
+Voltage Source: 45 volts
+Series Current: 0.002 amps
+Total Power: 0.09 watts
+
+R1
+Resistance: 5000 ohms
+Voltage Drop: 10 volts
+Power Dissipation: 0.02 watts
+
+R2
+Resistance: 10000 ohms
+Voltage Drop: 20 volts
+Power Dissipation: 0.04 watts
+
+R3
+Resistance: 7500 ohms
+Voltage Drop: 15 volts
+Power Dissipation: 0.03 watts
