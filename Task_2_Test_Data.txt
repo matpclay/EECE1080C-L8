@@ -2,7 +2,7 @@
 @date 1 November 2016
 @assign.ment Lab 8 Ohm's Law
 @descrip.tion
-This text file contains the test data for Part 2, Task 1. A simple 1-node DC CKT Simulator.
+This text file contains the test data for Task 2. A multi-node DC CKT Simulator.
 
 Input source voltage (volts): 45
 

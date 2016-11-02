@@ -2,7 +2,7 @@
 @date 31 October 2016
 @assign.ment Lab 8 Ohm's Law
 @descrip.tion
-This text file contains the test data for Part 1 of the lab. These were tested separately because the output with both 
+This text file contains the test data for Task 1 of the lab. These were tested separately because the output with both 
 looks a little funny due to when the deconstructor is called for the first instance.
 
 Overloaded Constructor:

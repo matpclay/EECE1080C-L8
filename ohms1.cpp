@@ -1,93 +1,106 @@
 /*
 * @author Matthew Clayton
-* @date 1 November 2016
+* @date 31 October 2016
 * @assign.ment Lab 8 Ohm's Law
 * @descrip.tion
-* This file contains code for Task 1 of Part 2 of L8. This program
-* allows for 'unlimited' resistors by using the vector class. The
-* program outputs total power, series current, voltage source, and
-* power and resistance for each resistor. Task 1 implements a
-* basic simple 1-node DC CKT Simulator.
+* This file contains the code for Task 1 of the Ohm's Law lab (L8)
+* for EECE1080C. This file handles a situation involving one
+* resistor and one DC input voltage source, then uses these values
+* to calculate the current and power values. This program
+* contains a constructor to get keyboard input, and an overloaded
+* constructor to get parameterized input.
+*
+* KNOWN ISSUES:
+*
+* With both constructors operating in the main method, the
+* output looks a little odd because the deconstructor for both
+* instances is not called until the end of the method.
+*
+* This program does not handle non-numerical input.
 */
 
 #include <iostream>
-#include <vector>
 using namespace std;
 
 class Ohms1 {
-  vector<double> resistors;
-  vector<double> powerConsumption;
-  vector<double> voltageAcross;
-  double sourceVoltage;
-  double seriesCurrent;
-  double totalPower;
+  // private members to store values
+  double voltage;
   double resistance;
-  double totalResistance = 0;
+  double current;
+  double power;
 public:
-  void setup();
+  // getters and setters for voltage and resistance
+  void setVoltage(double);
+  void setResistance(double);
+  double getVoltage() {return voltage;}
+  double getResistance() {return resistance;}
+  // unclear if getters are wanted for current and power
+  double getCurrent() {return current;}
+  double getPower() { return power;}
+  // utility and display methods
   void utility();
   void display();
-  void resistorUtility();
+  // constructors
+  Ohms1();
+  Ohms1(double, double);
+  // deconstructor
+  ~Ohms1();
 };
 
-void Ohms1::setup() {
-  // get source voltage
-  cout << "Input source voltage (volts): ";
-  cin >> sourceVoltage;
+// constructors
+Ohms1::Ohms1(void) {
+  cout << "\nEnter Voltage: ";
+  cin >> voltage;
+  cout << "\nEnter Resistance: ";
+  cin >> resistance;
   cout << endl;
-  // get resistor(s)
-  cout << "Input resistor values. At any time, enter a negative value to stop adding resistors.\n" << endl;
-  while (resistance >= 0) {
-    cout << "Input resistor value (ohms): ";
-    cin >> resistance;
-    if (resistance >= 0) {
-      resistors.push_back(resistance);
-      cout << endl;
-    } else {
-      break;
-    }
-  }
-  cout << endl;
+  current = voltage / resistance;
+  power = voltage * current;
 }
 
+Ohms1::Ohms1(double volts, double resistor) {
+  voltage = volts;
+  resistance = resistor;
+  current = voltage / resistance;
+  power = voltage * current;
+}
+
+// deconstructor
+Ohms1::~Ohms1(void) {
+  cout << "Circuit Destroyed" << endl;
+}
+
+// setters
+void Ohms1::setVoltage(double volt) {
+  voltage = volt; // sets voltage
+}
+
+void Ohms1::setResistance(double resist) {
+  resistance = resist; // sets resistance
+}
+
+// utility, unclear if wanted voltage and current to be
+// parameters or just accessed (and if so, with getters or not)
 void Ohms1::utility() {
-  // get total resistance
-  for (int k = 0; k < resistors.size(); k++) {
-    totalResistance += resistors.at(k);
-  }
-  // get series current and total power consumption
-  seriesCurrent = sourceVoltage / totalResistance;
-  totalPower = seriesCurrent * sourceVoltage;
+  current = getVoltage() / getResistance();
+  power = getVoltage() * current;
 }
 
-void Ohms1::resistorUtility() {
-  for (int n = 0; n < resistors.size(); n++) {
-    voltageAcross.push_back(resistors.at(n) * seriesCurrent);
-    powerConsumption.push_back(seriesCurrent * voltageAcross.at(n));
-  }
-}
-
-void Ohms1::display() {
-  cout << "Voltage Source: " << sourceVoltage << " volts" << endl;
-  cout << "Series Current: " << seriesCurrent << " amps" << endl;
-  cout << "Total Power: " << totalPower << " watts" << endl;
-  cout << endl;
-  // output voltage drop and power dissipation for each resistor
-  for (int d = 0; d < resistors.size(); d++) {
-    cout << "R" << (d+1) << endl;
-    cout << "Resistance: " << resistors.at(d) << " ohms" << endl;
-    cout << "Voltage Drop: " << voltageAcross.at(d) << " volts" << endl;
-    cout << "Power Dissipation: " << powerConsumption.at(d) << " watts" << endl;
-    cout << endl;
-  }
+// display
+void Ohms1::display(void) {
+  cout << "Circuit Parameters: " << endl;
+  cout << "\tResistance: " << getResistance() << " ohm" << endl;
+  cout << "\tVoltage: " << getVoltage() << " volts" << endl;
+  cout << "\tCurrent: " << getCurrent() << " Amps" << endl;
+  cout << "\tPower: " << getPower() << " Watts" << endl;
 }
 
 int main() {
-  Ohms1 circuit; // create circuit
-  circuit.setup(); // setup circuit
-  circuit.utility(); // utilities
-  circuit.resistorUtility();
-  circuit.display(); // display values
+  Ohms1 overload(10, 1);
+  overload.display();
+
+  Ohms1 standard;
+  standard.display();
 
   return 0;
 }
